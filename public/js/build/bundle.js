@@ -44661,36 +44661,30 @@
 	                    _react2.default.createElement(
 	                        'form',
 	                        { method: 'post', onSubmit: handleSubmit(this.handleSubmit) },
-	                        _react2.default.createElement(
-	                            _reduxForm.Field,
-	                            {
-	                                name: 'first_name',
-	                                component: _renderText2.default,
-	                                type: 'test',
-	                                label: 'First Name'
-	                            },
-	                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-envelope form-control-feedback' })
-	                        ),
-	                        _react2.default.createElement(
-	                            _reduxForm.Field,
-	                            {
-	                                name: 'last_name',
-	                                component: _renderText2.default,
-	                                type: 'text',
-	                                label: 'Last Name'
-	                            },
-	                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-envelope form-control-feedback' })
-	                        ),
-	                        _react2.default.createElement(
-	                            _reduxForm.Field,
-	                            {
-	                                name: 'email',
-	                                component: _renderText2.default,
-	                                type: 'email',
-	                                label: 'Email'
-	                            },
-	                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-envelope form-control-feedback' })
-	                        ),
+	                        _react2.default.createElement(_reduxForm.Field, {
+	                            name: 'first_name',
+	                            component: _renderText2.default,
+	                            type: 'text',
+	                            label: 'First Name'
+	                        }),
+	                        _react2.default.createElement(_reduxForm.Field, {
+	                            name: 'last_name',
+	                            component: _renderText2.default,
+	                            type: 'text',
+	                            label: 'Last Name'
+	                        }),
+	                        _react2.default.createElement(_reduxForm.Field, {
+	                            name: 'email',
+	                            component: _renderText2.default,
+	                            type: 'email',
+	                            label: 'Email'
+	                        }),
+	                        _react2.default.createElement(_reduxForm.Field, {
+	                            name: 'password',
+	                            component: _renderText2.default,
+	                            type: 'password',
+	                            label: 'Password'
+	                        }),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'row' },
@@ -44753,6 +44747,10 @@
 	        errors.email = '(The email field is required.)';
 	    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
 	        errors.email = 'Invalid email address.';
+	    }
+	
+	    if (!values.password) {
+	        errors.password = '(The password is required.)';
 	    }
 	
 	    return errors;

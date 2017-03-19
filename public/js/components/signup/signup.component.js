@@ -53,10 +53,9 @@ class SignupForm extends Component {
                         <Field
                             name="first_name"
                             component={renderText}
-                            type="test"
+                            type="text"
                             label="First Name"
                         >
-                            <span className="glyphicon glyphicon-envelope form-control-feedback"></span>
                         </Field>
                         <Field
                             name="last_name"
@@ -64,7 +63,6 @@ class SignupForm extends Component {
                             type="text"
                             label="Last Name"
                         >
-                            <span className="glyphicon glyphicon-envelope form-control-feedback"></span>
                         </Field>
                         <Field
                             name="email"
@@ -72,7 +70,13 @@ class SignupForm extends Component {
                             type="email"
                             label="Email"
                         >
-                            <span className="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        </Field>
+                        <Field
+                            name="password"
+                            component={renderText}
+                            type="password"
+                            label="Password"
+                        >
                         </Field>
 
                         <div className="row">
@@ -131,6 +135,11 @@ const validateSignup = values => {
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
         errors.email = 'Invalid email address.'
     }
+
+    if (!values.password) {
+        errors.password = '(The password is required.)'
+    }
+
 
     return errors
 };

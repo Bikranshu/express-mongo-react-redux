@@ -7,18 +7,19 @@ mongoose.Promise = require('bluebird');
 var UserSchema = new Schema({
     first_name: {
         type: String,
-        Required: 'Please enter the first name'
+        required: 'Please enter the first name'
     },
     last_name: {
         type: String,
-        Required: 'Please enter the last name'
+        required: 'Please enter the last name'
     },
     email: {
         type: String,
-        Required: 'Please enter the email'
+        required: 'Please enter the email'
     },
     password: {
-        type: String
+        type: String,
+        required: 'Please enter the last name'
     },
     created_at: {
         type: Date,
