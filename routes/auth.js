@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Auth = require('../controllers/AuthController');
 
 router.route('/auth/login')
 
@@ -10,7 +11,7 @@ router.route('/auth/login')
      * @return list of users in JSON format
      */
     .post(function (req, res) {
-        res.json({message: 'hooray! welcome to our api!'});
+        Auth.authenticate(req, res);
     });
 
 module.exports = router;

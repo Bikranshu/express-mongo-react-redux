@@ -8,14 +8,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var config = require(__dirname + '/constants');
+var constant = require(__dirname + '/constants');
 
 module.exports = function (app) {
 
     console.log('Initializing Express');
 
     // view engine setup
-    app.set('views', config.viewsDir);
+    app.set('views', constant.viewsDir);
     app.set('view engine', 'jade');
 
     // uncomment after placing your favicon in /public
@@ -24,6 +24,6 @@ module.exports = function (app) {
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(bodyParser.json());
     app.use(cookieParser());
-    app.use(express.static(config.assetsDir));
+    app.use(express.static(constant.assetsDir));
 
 };

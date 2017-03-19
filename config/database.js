@@ -1,7 +1,8 @@
+var config = require('./config');
 var mongoose = require('mongoose');
 
 // Build the connection string
-var connectionString = 'mongodb://localhost:27017/expressReact';
+var connectionString = 'mongodb://' +config.host+ ':' +config.port+ '/' + config.dbName;
 
 // Create the database connection
 mongoose.connect(connectionString);

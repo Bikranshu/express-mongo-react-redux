@@ -4,6 +4,9 @@ import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
 
 
+import Common from '../../constants/common';
+import * as apiAction from '../../actions/apiAction';
+import * as crudAction from '../../actions/crudAction';
 import * as flashMessage  from '../../actions/flashMessage';
 
 /**
@@ -29,7 +32,7 @@ class SignupForm extends Component {
     }
 
     handleSubmit(formProps) {
-        // TODO
+        this.props.actions.submitForm(Common.Users, formProps);
     }
 
     render() {
@@ -99,7 +102,8 @@ SignupForm.propTypes = {
  */
 function mapStateToProps(state) {
     return {
-        message: state.flash.message
+        message: state.flash.message,
+        apiState: state.api,
     }
 }
 
@@ -108,7 +112,7 @@ function mapStateToProps(state) {
  */
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(_.assign({}, flashMessage), dispatch)
+        actions: bindActionCreators(_.assign({}, crudAction, apiAction, flashMessage), dispatch)
     }
 }
 

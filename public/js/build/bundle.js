@@ -89,11 +89,11 @@
 	
 	var _signup2 = _interopRequireDefault(_signup);
 	
-	var _forgot = __webpack_require__(/*! ./components/forgot/forgot.component */ 522);
+	var _forgot = __webpack_require__(/*! ./components/forgot/forgot.component */ 527);
 	
 	var _forgot2 = _interopRequireDefault(_forgot);
 	
-	var _store = __webpack_require__(/*! ./store/store */ 523);
+	var _store = __webpack_require__(/*! ./store/store */ 528);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -44562,6 +44562,18 @@
 	
 	var _reduxForm = __webpack_require__(/*! redux-form */ 316);
 	
+	var _common = __webpack_require__(/*! ../../constants/common */ 521);
+	
+	var _common2 = _interopRequireDefault(_common);
+	
+	var _apiAction = __webpack_require__(/*! ../../actions/apiAction */ 308);
+	
+	var apiAction = _interopRequireWildcard(_apiAction);
+	
+	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 522);
+	
+	var crudAction = _interopRequireWildcard(_crudAction);
+	
 	var _flashMessage = __webpack_require__(/*! ../../actions/flashMessage */ 309);
 	
 	var flashMessage = _interopRequireWildcard(_flashMessage);
@@ -44570,7 +44582,7 @@
 	
 	var _message2 = _interopRequireDefault(_message);
 	
-	var _renderText = __webpack_require__(/*! ../common/form/renderText */ 521);
+	var _renderText = __webpack_require__(/*! ../common/form/renderText */ 526);
 	
 	var _renderText2 = _interopRequireDefault(_renderText);
 	
@@ -44614,7 +44626,7 @@
 	    }, {
 	        key: 'handleSubmit',
 	        value: function handleSubmit(formProps) {
-	            // TODO
+	            this.props.actions.submitForm(_common2.default.Users, formProps);
 	        }
 	    }, {
 	        key: 'render',
@@ -44713,7 +44725,8 @@
 	 */
 	function mapStateToProps(state) {
 	    return {
-	        message: state.flash.message
+	        message: state.flash.message,
+	        apiState: state.api
 	    };
 	}
 	
@@ -44722,7 +44735,7 @@
 	 */
 	function mapDispatchToProps(dispatch) {
 	    return {
-	        actions: (0, _redux.bindActionCreators)(_.assign({}, flashMessage), dispatch)
+	        actions: (0, _redux.bindActionCreators)(_.assign({}, crudAction, apiAction, flashMessage), dispatch)
 	    };
 	}
 	
@@ -44755,6 +44768,389 @@
 
 /***/ },
 /* 521 */
+/*!***************************************!*\
+  !*** ./public/js/constants/common.js ***!
+  \***************************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var commons = {
+	    Users: 'users'
+	};
+	
+	exports.default = commons;
+
+/***/ },
+/* 522 */
+/*!*****************************************!*\
+  !*** ./public/js/actions/crudAction.js ***!
+  \*****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.fetchAll = fetchAll;
+	exports.fetchById = fetchById;
+	exports.storeItem = storeItem;
+	exports.updateItem = updateItem;
+	exports.destroyItem = destroyItem;
+	exports.submitForm = submitForm;
+	exports.clearList = clearList;
+	exports.updateSelectedItem = updateSelectedItem;
+	exports.clearSelectedItem = clearSelectedItem;
+	exports.errorHandler = errorHandler;
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 219);
+	
+	var _actionType = __webpack_require__(/*! ../constants/actionType */ 306);
+	
+	var ActionType = _interopRequireWildcard(_actionType);
+	
+	var _apiAction = __webpack_require__(/*! ./apiAction */ 308);
+	
+	var apiAction = _interopRequireWildcard(_apiAction);
+	
+	var _apiService = __webpack_require__(/*! ../services/apiService */ 523);
+	
+	var apiService = _interopRequireWildcard(_apiService);
+	
+	var _converter = __webpack_require__(/*! ../utils/converter */ 525);
+	
+	var Converter = _interopRequireWildcard(_converter);
+	
+	var _flashMessage = __webpack_require__(/*! ./flashMessage */ 309);
+	
+	var FlashMessage = _interopRequireWildcard(_flashMessage);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	/**
+	 * Actions that are dispatched from crudAction
+	 */
+	
+	
+	/**
+	 * Import all converter as an object.
+	 */
+	
+	
+	/**
+	 * Import all apiAction as an object.
+	 */
+	var commonActions = {
+	    list: function list(entity, data) {
+	        return {
+	            type: ActionType.LIST,
+	            entity: entity,
+	            data: data
+	        };
+	    },
+	
+	    selectItem: function selectItem(entity, data) {
+	        return {
+	            type: ActionType.SELECT_ITEM,
+	            entity: entity,
+	            data: data
+	        };
+	    },
+	
+	    delete: function _delete(entity, id) {
+	        return {
+	            type: ActionType.DELETE,
+	            entity: entity,
+	            id: id
+	        };
+	    }
+	
+	};
+	
+	/**
+	 * These are the actions every CRUD in the application uses.
+	 *
+	 * Every time an action that requires the API is called, it first Dispatches an "apiRequest" action.
+	 *
+	 * ApiService returns a promise which dispatches another action "apiResponse".
+	 *
+	 * entity = 'Product', 'Employee', ...
+	 */
+	
+	/**
+	 * Import flashMessage.
+	 */
+	
+	
+	/**
+	 * Import all apiService as an object.
+	 */
+	
+	
+	/**
+	 * Import all ActionType as an object.
+	 */
+	function fetchAll(entity, data) {
+	    return function (dispatch) {
+	        dispatch(apiAction.apiRequest());
+	        return apiService.fetch(entity, data).then(function (response) {
+	            dispatch(apiAction.apiResponse());
+	            dispatch(commonActions.list(entity, response.data));
+	        }).catch(function (error) {
+	            errorHandler(dispatch, error.response, ActionType.FAILURE);
+	        });
+	    };
+	}
+	
+	function fetchById(entity, id) {
+	    return function (dispatch) {
+	        dispatch(apiAction.apiRequest());
+	        return apiService.fetch(Converter.getPathParam(entity, id)).then(function (response) {
+	            dispatch(apiAction.apiResponse());
+	            dispatch(commonActions.selectItem(entity, response.data));
+	        }).catch(function (error) {
+	            errorHandler(dispatch, error.response, ActionType.FAILURE);
+	        });
+	    };
+	}
+	
+	function storeItem(entity, data) {
+	    return function (dispatch) {
+	        dispatch(apiAction.apiRequest());
+	        return apiService.store(entity, data).then(function (response) {
+	            dispatch(apiAction.apiResponse());
+	
+	            dispatch(FlashMessage.addFlashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' added successfully.'));
+	
+	            _reactRouter.browserHistory.goBack();
+	        }).catch(function (error) {
+	            errorHandler(dispatch, error.response, ActionType.FAILURE);
+	        });
+	    };
+	}
+	
+	function updateItem(entity, data, id) {
+	    return function (dispatch) {
+	        dispatch(apiAction.apiRequest());
+	        return apiService.update(entity, data, id).then(function (response) {
+	            dispatch(apiAction.apiResponse());
+	
+	            dispatch(FlashMessage.addFlashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' updated successfully.'));
+	
+	            _reactRouter.browserHistory.goBack();
+	        }).catch(function (error) {
+	            errorHandler(dispatch, error.response, ActionType.FAILURE);
+	        });
+	    };
+	}
+	
+	function destroyItem(entity, id, data) {
+	    return function (dispatch) {
+	        dispatch(apiAction.apiRequest());
+	        return apiService.destroy(entity, id).then(function (response) {
+	            dispatch(apiAction.apiResponse());
+	
+	            dispatch(FlashMessage.addFlashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' deleted successfully.'));
+	
+	            dispatch(fetchAll(entity, data));
+	        }).catch(function (error) {
+	            errorHandler(dispatch, error.response, ActionType.FAILURE);
+	        });
+	    };
+	}
+	
+	function submitForm(entity, data, id) {
+	    return function (dispatch) {
+	        if (id) {
+	            dispatch(updateItem(entity, data, id));
+	        } else {
+	            dispatch(storeItem(entity, data));
+	        }
+	    };
+	}
+	
+	function clearList(entity) {
+	    return {
+	        type: ActionType.CLEAR_LIST,
+	        entity: entity
+	    };
+	}
+	
+	function updateSelectedItem(entity, key, value) {
+	    return {
+	        type: ActionType.UPDATE_SELECTED_ITEM,
+	        entity: entity,
+	        key: key,
+	        value: value
+	    };
+	}
+	
+	function clearSelectedItem(entity) {
+	    return {
+	        type: ActionType.CLEAR_SELECTED_ITEM,
+	        entity: entity
+	    };
+	}
+	
+	function errorHandler(dispatch, error, type) {
+	    var errorMessage = error.data.message ? error.data.message : error.data;
+	
+	    // NOT AUTHENTICATED ERROR
+	    if (error.status === 401) {
+	        errorMessage = 'You are not authorized to do this. Please login and try again.';
+	    }
+	
+	    dispatch({
+	        type: type,
+	        payload: errorMessage
+	    });
+	}
+
+/***/ },
+/* 523 */
+/*!******************************************!*\
+  !*** ./public/js/services/apiService.js ***!
+  \******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.fetch = fetch;
+	exports.store = store;
+	exports.update = update;
+	exports.destroy = destroy;
+	
+	var _apiUtil = __webpack_require__(/*! ../utils/apiUtil */ 524);
+	
+	var ApiUtil = _interopRequireWildcard(_apiUtil);
+	
+	var _converter = __webpack_require__(/*! ../utils/converter */ 525);
+	
+	var Converter = _interopRequireWildcard(_converter);
+	
+	var _app = __webpack_require__(/*! ../constants/app */ 307);
+	
+	var _app2 = _interopRequireDefault(_app);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function fetch(pathParam, data) {
+	    return ApiUtil.fetch(_app2.default.API_URL, pathParam.toLowerCase());
+	} // Import utils
+	function store(resourceName, data) {
+	    return ApiUtil.store(_app2.default.API_URL, resourceName.toLowerCase(), data);
+	}
+	
+	function update(resourceName, data, dataId) {
+	    return ApiUtil.update(_app2.default.API_URL, Converter.getPathParam(resourceName.toLowerCase(), dataId), data);
+	}
+	
+	function destroy(resourceName, dataId) {
+	    return ApiUtil.destroy(_app2.default.API_URL, Converter.getPathParam(resourceName.toLowerCase(), dataId));
+	}
+
+/***/ },
+/* 524 */
+/*!************************************!*\
+  !*** ./public/js/utils/apiUtil.js ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.fetch = fetch;
+	exports.store = store;
+	exports.update = update;
+	exports.destroy = destroy;
+	
+	var _axios = __webpack_require__(/*! axios */ 281);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	var _reactCookie = __webpack_require__(/*! react-cookie */ 216);
+	
+	var _reactCookie2 = _interopRequireDefault(_reactCookie);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function fetch(url, pathParam) {
+	    return _axios2.default.get(url + pathParam, {
+	        headers: { 'Authorization': 'Bearer' + ' ' + _reactCookie2.default.load('token') }
+	    });
+	}
+	
+	function store(url, pathParam, data) {
+	    return _axios2.default.post(url + pathParam, data, {
+	        headers: { 'Authorization': 'Bearer' + ' ' + _reactCookie2.default.load('token') }
+	    });
+	}
+	
+	function update(url, pathParam, data) {
+	    return _axios2.default.put(url + pathParam, data, {
+	        headers: { 'Authorization': 'Bearer' + ' ' + _reactCookie2.default.load('token') }
+	    });
+	}
+	
+	function destroy(url, pathParam) {
+	    return _axios2.default.delete(url + pathParam, {
+	        headers: { 'Authorization': 'Bearer' + ' ' + _reactCookie2.default.load('token') }
+	    });
+	}
+
+/***/ },
+/* 525 */
+/*!**************************************!*\
+  !*** ./public/js/utils/converter.js ***!
+  \**************************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	exports.serialize = serialize;
+	exports.getPathParam = getPathParam;
+	function serialize(data) {
+	    if ((typeof data === 'undefined' ? 'undefined' : _typeof(data)) != 'object') {
+	        return '?' + data;
+	    }
+	    var str = [];
+	    for (var p in data) {
+	        if (data[p] && data.hasOwnProperty(p)) {
+	            str.push(encodeURIComponent(p) + '=' + encodeURIComponent(data[p]));
+	        }
+	    }
+	    return '?' + str.join('&');
+	}
+	
+	function getPathParam() {
+	    var args = arguments;
+	    var params = [];
+	
+	    for (var a in args) {
+	        params.push(args[a]);
+	    }
+	    return params.join('/');
+	}
+
+/***/ },
+/* 526 */
 /*!********************************************************!*\
   !*** ./public/js/components/common/form/renderText.js ***!
   \********************************************************/
@@ -44825,7 +45221,7 @@
 	exports.default = renderText;
 
 /***/ },
-/* 522 */
+/* 527 */
 /*!*********************************************************!*\
   !*** ./public/js/components/forgot/forgot.component.js ***!
   \*********************************************************/
@@ -44857,7 +45253,7 @@
 	
 	var _message2 = _interopRequireDefault(_message);
 	
-	var _renderText = __webpack_require__(/*! ../common/form/renderText */ 521);
+	var _renderText = __webpack_require__(/*! ../common/form/renderText */ 526);
 	
 	var _renderText2 = _interopRequireDefault(_renderText);
 	
@@ -45013,7 +45409,7 @@
 	})(ForgotForm));
 
 /***/ },
-/* 523 */
+/* 528 */
 /*!**********************************!*\
   !*** ./public/js/store/store.js ***!
   \**********************************/
@@ -45027,15 +45423,15 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 189);
 	
-	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 524);
+	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 529);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reduxLogger = __webpack_require__(/*! redux-logger */ 525);
+	var _reduxLogger = __webpack_require__(/*! redux-logger */ 530);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
-	var _rootReducer = __webpack_require__(/*! ../reducers/rootReducer */ 531);
+	var _rootReducer = __webpack_require__(/*! ../reducers/rootReducer */ 536);
 	
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 	
@@ -45059,7 +45455,7 @@
 	exports.default = store;
 
 /***/ },
-/* 524 */
+/* 529 */
 /*!************************************!*\
   !*** ./~/redux-thunk/lib/index.js ***!
   \************************************/
@@ -45090,7 +45486,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 525 */
+/* 530 */
 /*!*************************************!*\
   !*** ./~/redux-logger/lib/index.js ***!
   \*************************************/
@@ -45104,11 +45500,11 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _core = __webpack_require__(/*! ./core */ 526);
+	var _core = __webpack_require__(/*! ./core */ 531);
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 527);
+	var _helpers = __webpack_require__(/*! ./helpers */ 532);
 	
-	var _defaults = __webpack_require__(/*! ./defaults */ 530);
+	var _defaults = __webpack_require__(/*! ./defaults */ 535);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -45225,7 +45621,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 526 */
+/* 531 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/core.js ***!
   \************************************/
@@ -45241,9 +45637,9 @@
 	
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 527);
+	var _helpers = __webpack_require__(/*! ./helpers */ 532);
 	
-	var _diff = __webpack_require__(/*! ./diff */ 528);
+	var _diff = __webpack_require__(/*! ./diff */ 533);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -45370,7 +45766,7 @@
 	}
 
 /***/ },
-/* 527 */
+/* 532 */
 /*!***************************************!*\
   !*** ./~/redux-logger/lib/helpers.js ***!
   \***************************************/
@@ -45397,7 +45793,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 528 */
+/* 533 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/diff.js ***!
   \************************************/
@@ -45410,7 +45806,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(/*! deep-diff */ 529);
+	var _deepDiff = __webpack_require__(/*! deep-diff */ 534);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -45499,7 +45895,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 529 */
+/* 534 */
 /*!******************************!*\
   !*** ./~/deep-diff/index.js ***!
   \******************************/
@@ -45931,7 +46327,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 530 */
+/* 535 */
 /*!****************************************!*\
   !*** ./~/redux-logger/lib/defaults.js ***!
   \****************************************/
@@ -45985,7 +46381,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 531 */
+/* 536 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/rootReducer.js ***!
   \*******************************************/
@@ -46001,19 +46397,19 @@
 	
 	var _reactRouterRedux = __webpack_require__(/*! react-router-redux */ 272);
 	
-	var _authReducer = __webpack_require__(/*! ./authReducer */ 532);
+	var _authReducer = __webpack_require__(/*! ./authReducer */ 537);
 	
 	var _authReducer2 = _interopRequireDefault(_authReducer);
 	
-	var _crudReducer = __webpack_require__(/*! ./crudReducer */ 534);
+	var _crudReducer = __webpack_require__(/*! ./crudReducer */ 539);
 	
 	var _crudReducer2 = _interopRequireDefault(_crudReducer);
 	
-	var _apiReducer = __webpack_require__(/*! ./apiReducer */ 535);
+	var _apiReducer = __webpack_require__(/*! ./apiReducer */ 540);
 	
 	var _apiReducer2 = _interopRequireDefault(_apiReducer);
 	
-	var _flashMessageReducer = __webpack_require__(/*! ./flashMessageReducer */ 536);
+	var _flashMessageReducer = __webpack_require__(/*! ./flashMessageReducer */ 541);
 	
 	var _flashMessageReducer2 = _interopRequireDefault(_flashMessageReducer);
 	
@@ -46034,7 +46430,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 532 */
+/* 537 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/authReducer.js ***!
   \*******************************************/
@@ -46073,7 +46469,7 @@
 	    }
 	};
 	
-	var _lodash = __webpack_require__(/*! lodash */ 533);
+	var _lodash = __webpack_require__(/*! lodash */ 538);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -46101,7 +46497,7 @@
 	 */
 
 /***/ },
-/* 533 */
+/* 538 */
 /*!****************************!*\
   !*** ./~/lodash/lodash.js ***!
   \****************************/
@@ -63195,7 +63591,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(/*! ./../webpack/buildin/module.js */ 203)(module)))
 
 /***/ },
-/* 534 */
+/* 539 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/crudReducer.js ***!
   \*******************************************/
@@ -63214,7 +63610,7 @@
 	    switch (action.type) {
 	        case ActionType.LIST:
 	            newState = _lodash2.default.cloneDeep(state);
-	            newState[action.entity + 's'] = _lodash2.default.cloneDeep(action.data.data);
+	            newState[action.entity] = _lodash2.default.cloneDeep(action.data.data);
 	            return newState;
 	
 	        case ActionType.SELECT_ITEM:
@@ -63229,14 +63625,14 @@
 	
 	        case ActionType.DELETE:
 	            newState = _lodash2.default.cloneDeep(state);
-	            var data = newState[action.entity + 's'];
+	            var data = newState[action.entity];
 	            var index = _lodash2.default.indexOf(data, _lodash2.default.find(data, { id: action.id }));
 	            data.splice(index, 1);
 	            return newState;
 	
 	        case ActionType.CLEAR_LIST:
 	            newState = _lodash2.default.cloneDeep(state);
-	            newState[action.entity + 's'] = {};
+	            newState[action.entity] = {};
 	            return newState;
 	
 	        case ActionType.CLEAR_SELECTED_ITEM:
@@ -63249,7 +63645,7 @@
 	    }
 	};
 	
-	var _lodash = __webpack_require__(/*! lodash */ 533);
+	var _lodash = __webpack_require__(/*! lodash */ 538);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -63278,7 +63674,7 @@
 	// Import constants
 
 /***/ },
-/* 535 */
+/* 540 */
 /*!******************************************!*\
   !*** ./public/js/reducers/apiReducer.js ***!
   \******************************************/
@@ -63321,7 +63717,7 @@
 	    }
 	};
 	
-	var _lodash = __webpack_require__(/*! lodash */ 533);
+	var _lodash = __webpack_require__(/*! lodash */ 538);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -63347,7 +63743,7 @@
 	// Import constants
 
 /***/ },
-/* 536 */
+/* 541 */
 /*!***************************************************!*\
   !*** ./public/js/reducers/flashMessageReducer.js ***!
   \***************************************************/
@@ -63380,7 +63776,7 @@
 	    }
 	};
 	
-	var _lodash = __webpack_require__(/*! lodash */ 533);
+	var _lodash = __webpack_require__(/*! lodash */ 538);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	

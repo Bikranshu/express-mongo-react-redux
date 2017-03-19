@@ -22,7 +22,7 @@ export default function (state, action) {
     switch (action.type) {
         case ActionType.LIST:
             newState = _.cloneDeep(state);
-            newState[action.entity + 's'] = _.cloneDeep(action.data.data);
+            newState[action.entity] = _.cloneDeep(action.data.data);
             return newState;
 
         case ActionType.SELECT_ITEM:
@@ -37,14 +37,14 @@ export default function (state, action) {
 
         case ActionType.DELETE:
             newState = _.cloneDeep(state);
-            let data = newState[action.entity + 's'];
+            let data = newState[action.entity];
             let index = _.indexOf(data, _.find(data, {id: action.id}));
             data.splice(index, 1);
             return newState;
 
         case ActionType.CLEAR_LIST:
             newState = _.cloneDeep(state);
-            newState[action.entity + 's'] = {};
+            newState[action.entity ] = {};
             return newState;
 
         case ActionType.CLEAR_SELECTED_ITEM:

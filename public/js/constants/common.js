@@ -1,5 +1,5 @@
 const commons = {
-    User: 'user'
+    Users: 'users'
 };
 
 export default commons

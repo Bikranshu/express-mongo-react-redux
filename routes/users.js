@@ -43,7 +43,7 @@ router.route('/users/:id')
      * @return list of users in JSON format
      */
     .get(function (req, res) {
-        res.json({message: 'hooray! welcome to our api!'});
+        User.findById(req, res);
     })
 
     /**
@@ -53,7 +53,7 @@ router.route('/users/:id')
      * @return list of users in JSON format
      */
     .put(function (req, res) {
-        res.json({message: 'hooray! welcome to our api!'});
+       User.update(req, res);
     })
 
     /**
@@ -63,7 +63,7 @@ router.route('/users/:id')
      * @return list of users in JSON format
      */
     .delete(function (req, res) {
-        res.json({message: 'hooray! welcome to our api!'});
+       User.delete(req, res);
     });
 
 module.exports = router;
