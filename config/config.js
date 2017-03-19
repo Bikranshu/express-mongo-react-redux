@@ -2,17 +2,17 @@ var config = {
     development: {
         host: '127.0.0.1',
         port: 27017,
-        database: express_react
+        database: expressReact
     },
     test: {
         host: '127.0.0.1',
         port: 27017,
-        database: express_react
+        database: expressReact
     },
     production: {
         host: '127.0.0.1',
         port: 27017,
-        database: express_react
+        database: expressReact
     }
 };
 module.exports = function (mode) {

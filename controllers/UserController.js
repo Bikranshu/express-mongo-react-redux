@@ -1,7 +1,6 @@
 'use strict';
-
-var mongoose = require('mongoose'),
-    User = mongoose.model('User');
+var User = require('../models/user');
+var mongoose = require('mongoose');
 
 exports.findAll = function (req, res) {
     User.find({}, function (err, user) {
@@ -13,8 +12,8 @@ exports.findAll = function (req, res) {
 
 
 exports.store = function (req, res) {
-    var NewUser = new User(req.body);
-    NewUser.save(function (err, user) {
+    var newUser = new User(req.body);
+    newUser.save(function (err, user) {
         if (err)
             res.send(err);
         res.json(user);
@@ -23,7 +22,7 @@ exports.store = function (req, res) {
 
 
 exports.findById = function (req, res) {
-    User.findById(req.params.userId, function (err, user) {
+    User.findById(req.params.id, function (err, user) {
         if (err)
             res.send(err);
         res.json(user);
@@ -32,7 +31,7 @@ exports.findById = function (req, res) {
 
 
 exports.update = function (req, res) {
-    User.findOneAndUpdate(req.params.userId, req.body, {new: true}, function (err, user) {
+    User.findOneAndUpdate(req.params.id, req.body, {new: true}, function (err, user) {
         if (err)
             res.send(err);
         res.json(user);
@@ -42,7 +41,7 @@ exports.update = function (req, res) {
 
 exports.delete = function (req, res) {
     User.remove({
-        _id: req.params.userId
+        _id: req.params.id
     }, function (err, user) {
         if (err)
             res.send(err);

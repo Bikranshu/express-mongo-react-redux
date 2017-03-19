@@ -1,11 +1,14 @@
 var express = require('express');
 var app = express();
 
-//Initialize Express
+//Initialize express
 require('./config/express')(app);
 
-//Initialize Routes
+//Initialize routes
 require('./config/routes')(app);
+
+//Initialize database
+database = require('./config/database');
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

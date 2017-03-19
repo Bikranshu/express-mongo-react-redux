@@ -1,12 +1,19 @@
-React, Redux and Express Js
+MongoDB, Express, React/Redux and Node (MERN)
+
+## Requirements
+
+- NodeJs
+- [NPM](https://npmjs.org/) - Node package manager
+- [MongoDB](https://www.mongodb.com/) - Database
 
 ## Installation
 
-- clone app from repository:
-- go to project folder
-- run the following command on terminal 
+- Clone application repository
+(```$ https://github.com/Bikranshu/express-mongo-react-redux.git```)
+- ``` cd express-mongo-react-redux```
+- Run the following command on terminal 
 ```
  $ npm install
- $ DEBUG=accessible:* npm start
+ $ npm start
  $ npm run watch
 ```

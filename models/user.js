@@ -1,6 +1,7 @@
 'use strict';
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+mongoose.Promise = require('bluebird');
 
 
 var UserSchema = new Schema({
@@ -12,9 +13,9 @@ var UserSchema = new Schema({
         type: String,
         Required: 'Please enter the last name'
     },
-    username: {
+    email: {
         type: String,
-        Required: 'Please enter the username'
+        Required: 'Please enter the email'
     },
     password: {
         type: String
