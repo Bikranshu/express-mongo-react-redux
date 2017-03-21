@@ -36,12 +36,13 @@ export function login({email, password}) {
 }
 
 
-export function logout(error) {
+export function logout() {
     return function (dispatch) {
-        dispatch({type: ActionType.LOG_OUT});
         cookie.remove(AppConstant.TOKEN, {path: '/'});
+        dispatch({type: ActionType.LOG_OUT});
 
-        window.location.href = AppConstant.ROOT_URL;
+        window.location.href = AppConstant.BASE_URL;
+        return false;
     };
 }
 

@@ -31207,12 +31207,13 @@
 	/**
 	 * Import flashMessage.
 	 */
-	function logout(error) {
+	function logout() {
 	    return function (dispatch) {
-	        dispatch({ type: ActionType.LOG_OUT });
 	        _reactCookie2.default.remove(_app2.default.TOKEN, { path: '/' });
+	        dispatch({ type: ActionType.LOG_OUT });
 	
-	        window.location.href = _app2.default.ROOT_URL;
+	        window.location.href = _app2.default.BASE_URL;
+	        return false;
 	    };
 	}
 	
@@ -32842,7 +32843,10 @@
 	});
 	var appConstant = {
 	    API_URL: 'http://localhost:3000/api/',
-	    ROOT_URL: 'http://localhost:3000/#/'
+	    ROOT_URL: 'http://localhost:3000/#/',
+	    BASE_URL: 'http://localhost:3000',
+	    BEARER: 'Bearer',
+	    TOKEN: 'token'
 	};
 	
 	exports.default = appConstant;
