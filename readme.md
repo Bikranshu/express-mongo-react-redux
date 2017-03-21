@@ -4,7 +4,7 @@ MongoDB, Express, React/Redux and Node (MERN)
 
 - NodeJs
 - [NPM](https://npmjs.org/) - Node package manager
-- [MongoDB](https://www.mongodb.com/) - Database
+- [MongoDB](https://www.mongodb.com/) - Document-oriented database
 
 ## Installation
 

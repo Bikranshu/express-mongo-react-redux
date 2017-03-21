@@ -10,26 +10,21 @@ exports.authenticate = function (req, res) {
 
         if (err) throw err;
 
-        if (!user) {
-            res.json({success: false, message: 'Authentication failed. User not found!'});
-        } else if (user) {
-
-            // check if password matches
-            if (user.password != req.body.password) {
-                res.json({success: false, message: 'Authentication failed. Invalid password.'});
-            } else {
-
+        if (user) {
+            if (user.password == req.body.password) {
                 // if user is found and password is right
                 // create a token
                 var token = jwt.sign(user, config.secretKey);
-
                 res.json({
                     success: true,
-                    message: 'User token!',
+                    user: user,
                     token: token
                 });
+            } else {
+                res.status(401).json({error: true, message: 'Authentication failed. Invalid password.'});
             }
-
+        } else {
+            res.status(401).json({error: true, message: 'Invalid username or password.'});
         }
 
     });
