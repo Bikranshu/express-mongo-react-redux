@@ -1,32 +1,31 @@
+'use strict';
 var webpack = require('webpack');
-var path = require('path');
-
-var BUILD_DIR = path.resolve(__dirname, 'public/js//build');
-var APP_DIR = path.resolve(__dirname, 'public/js');
 
 var config = {
-  devtool: 'inline-source-map',
-  entry: APP_DIR + '/main.js',
-  output: {
-    path: BUILD_DIR,
-    filename: 'bundle.js'
-  },
-  module : {
-    loaders : [
-      {
-        test: /\.(js|jsx)$/,
-        include : APP_DIR,
-        loader : 'babel',
-        query:
-        {
-          presets: ['es2015', 'stage-0', 'react']
-        }
-      }
-    ]
-  } ,
-  devServer: {
-    historyApiFallback: true
-}
+    context: __dirname + '/public/js',
+    entry: {
+        app: './main.js',
+    },
+    output: {
+        path: __dirname + '/public/js/build', //  destination
+        filename: 'bundle.js',
+        publicPath: "/",
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/, //Check for all js files
+                exclude: /node_modules/,
+                use: [{
+                    loader: 'babel-loader?-babelrc,+cacheDirectory,presets[]=es2015,presets[]=stage-0,presets[]=react',
+                }]
+            }
+        ]
+    },
+    devServer: {
+        contentBase: __dirname + '/public/js',
+    },
+    devtool: "eval-source-map" // Default development sourcemap
 };
 
 module.exports = config;
