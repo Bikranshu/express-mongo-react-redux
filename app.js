@@ -1,4 +1,5 @@
 var express = require('express');
+var cors = require('cors');
 var app = express();
 
 //Initialize express
@@ -9,6 +10,8 @@ require('./config/routes')(app);
 
 //Initialize database
 database = require('./config/database');
+
+app.use(cors());
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

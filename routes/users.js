@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../controllers/UserController');
+var isAuthenticated = require('../middlewares/authentication');
 
 /*  "/api/users"
  *    GET: finds all users
@@ -14,7 +15,7 @@ router.route('/users')
      * HTTP POST http://localhost:3000/api/users
      * @return list of users in JSON format
      */
-    .post(function (req, res) {
+    .post(isAuthenticated, function (req, res) {
         User.store(req, res);
     })
 
@@ -24,7 +25,7 @@ router.route('/users')
      * HTTP GET http://localhost:3000/api/users
      * @return list of users in JSON format
      */
-    .get(function (req, res) {
+    .get(isAuthenticated, function (req, res) {
        User.findAll(req, res);
     });
 
@@ -42,7 +43,7 @@ router.route('/users/:id')
      * HTTP GET http://localhost:3000/api/users/:id
      * @return list of users in JSON format
      */
-    .get(function (req, res) {
+    .get(isAuthenticated, function (req, res) {
         User.findById(req, res);
     })
 
@@ -52,7 +53,7 @@ router.route('/users/:id')
      * HTTP PUT http://localhost:3000/api/users/:id
      * @return list of users in JSON format
      */
-    .put(function (req, res) {
+    .put(isAuthenticated, function (req, res) {
        User.update(req, res);
     })
 
@@ -62,7 +63,7 @@ router.route('/users/:id')
      * HTTP DELETE http://localhost:3000/api/users/:id
      * @return list of users in JSON format
      */
-    .delete(function (req, res) {
+    .delete(isAuthenticated, function (req, res) {
        User.delete(req, res);
     });
 
