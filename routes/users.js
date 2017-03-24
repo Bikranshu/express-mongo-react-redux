@@ -15,7 +15,7 @@ router.route('/users')
      * HTTP POST http://localhost:3000/api/users
      * @return list of users in JSON format
      */
-    .post(isAuthenticated, function (req, res) {
+    .post(function (req, res) {
         User.store(req, res);
     })
 
