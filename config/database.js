@@ -5,7 +5,9 @@ var mongoose = require('mongoose');
 var connectionString = 'mongodb://' +config.host+ ':' +config.port+ '/' + config.dbName;
 
 // Create the database connection
-mongoose.connect(connectionString);
+mongoose.connect(connectionString, {
+    useMongoClient: true
+});
 
 // CONNECTION EVENTS
 // When successfully connected

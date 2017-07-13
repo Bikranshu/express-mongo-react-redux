@@ -26,4 +26,6 @@ On the command prompt run the following commands:
 
 ### 4. Usage
 
+URL : http://localhost:3000
+
 signup and login
