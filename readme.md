@@ -1,19 +1,29 @@
 MongoDB, Express, React/Redux and Node (MERN)
 
-## Requirements
+## Get Started
 
-- NodeJs
+### 1. Requirements
+
+- [NodeJs](https://nodejs.org/en/)
 - [NPM](https://npmjs.org/) - Node package manager
 - [MongoDB](https://www.mongodb.com/) - Document-oriented database
 
-## Installation
-
-- Clone application repository
-(```$ https://github.com/Bikranshu/express-mongo-react-redux.git```)
-- ``` cd express-mongo-react-redux```
-- Run the following command on terminal 
+### 2. Start MongoDB 
 ```
+$ sudo service mongod start
+```
+
+### 3. Installation
+
+On the command prompt run the following commands:
+``` 
+ $ git clone https://github.com/Bikranshu/express-mongo-react-redux.git
+ $ cd express-mongo-react-redux
  $ npm install
  $ npm start
- $ npm run watch
+ $ npm run watch (run on separate terminal window)
 ```
+
+### 4. Usage
+
+signup and login
