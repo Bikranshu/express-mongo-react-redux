@@ -7,8 +7,6 @@ MongoDB, Express, React/Redux and Node (MERN)
 - [NodeJs](https://nodejs.org/en/)
 - [NPM](https://npmjs.org/) - Node package manager
 - [MongoDB](https://www.mongodb.com/) - Document-oriented database
-- [Express.js](http://expressjs.com/) - Web framework for Node.js
-- [React](https://facebook.github.io/react/) - JavaScript library for building user interfaces
 
 ### 2. Start MongoDB 
 ```
@@ -33,7 +31,8 @@ URL : http://localhost:3000
 Add new user from signup page and login
 
 ### 5. Useful Link
-
+- Web framework for Node.js - [Express.js](http://expressjs.com/)
+- JavaScript library for building user interfaces - [React](https://facebook.github.io/react/)
 - Promise based HTTP client - [axios](https://github.com/mzabriskie/axios)
 - JSON Web Tokens(jwt) - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 - MongoDB object modeling tool- [mongoose](http://mongoosejs.com/)
