@@ -1,7 +1,7 @@
 'use strict';
 var jwt = require('jsonwebtoken');
+var HttpStatus = require('http-status-codes');
 var User = require('../models/user');
-var config = require('../config/config');
 
 exports.authenticate = function (req, res) {
     User.findOne({
@@ -15,19 +15,19 @@ exports.authenticate = function (req, res) {
                 if (isMatch) {
                     // if user is found and password is right
                     // create a token
-                    var token = jwt.sign(user, config.secretKey);
+                    var token = jwt.sign(user, process.env.TOKEN_SECRET_KEY);
                     res.json({
                         success: true,
                         user: user,
                         token: token
                     });
                 } else {
-                    res.status(401).json({error: true, message: 'Authentication failed. Invalid password.'});
+                    res.status(HttpStatus.UNAUTHORIZED).json({error: true, message: 'Authentication failed. Invalid password.'});
                 }
             });
 
         } else {
-            res.status(401).json({error: true, message: 'Invalid username or password.'});
+            res.status(HttpStatus.UNAUTHORIZED).json({error: true, message: 'Invalid username or password.'});
         }
 
     });

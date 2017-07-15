@@ -19,6 +19,7 @@ On the command prompt run the following commands:
 ``` 
  $ git clone https://github.com/Bikranshu/express-mongo-react-redux.git
  $ cd express-mongo-react-redux
+ $ cp .env.example .env (place secret key and database information)
  $ npm install
  $ npm start
  $ npm run watch (run on separate terminal window)

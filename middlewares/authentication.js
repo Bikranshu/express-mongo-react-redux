@@ -1,4 +1,4 @@
-var config = require('../config/config');
+var HttpStatus = require('http-status-codes');
 var jwtToken = require('../utils/jwtToken');
 
 // route middleware to verify a token
@@ -29,13 +29,13 @@ module.exports = function (req, res, next) {
         } else {
             // if there is no token
             // return an error
-            res.status(401).send('You are not authorized to perform this operation!');
+            res.status(HttpStatus.UNAUTHORIZED).send('You are not authorized to perform this operation!');
 
         }
     } else {
         // if there is no token
         // return an error
-        res.status(401).send('You are not authorized to perform this operation!');
+        res.status(HttpStatus.UNAUTHORIZED).send('You are not authorized to perform this operation!');
 
     }
 };

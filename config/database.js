@@ -1,8 +1,7 @@
-var config = require('./config');
 var mongoose = require('mongoose');
 
 // Build the connection string
-var connectionString = 'mongodb://' +config.host+ ':' +config.port+ '/' + config.dbName;
+var connectionString = 'mongodb://' + process.env.DB_HOST + ':' + process.env.DB_PORT + '/' + process.env.DB_NAME;
 
 // Create the database connection
 mongoose.connect(connectionString, {

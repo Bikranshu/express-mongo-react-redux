@@ -1,5 +1,4 @@
 var express = require('express');
-var cors = require('cors');
 var app = express();
 
 //Initialize express
@@ -11,12 +10,12 @@ require('./config/routes')(app);
 //Initialize database
 database = require('./config/database');
 
-app.use(cors());
+var HttpStatus = require('http-status-codes');
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
-    err.status = 404;
+    err.status = HttpStatus.HttpStatus.UNAUTHORIZED;
     next(err);
 });
 
@@ -27,7 +26,7 @@ app.use(function (err, req, res, next) {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     // render the error page
-    res.status(err.status || 500);
+    res.status(err.status || HttpStatus.INTERNAL_SERVER_ERROR);
     res.render('error');
 });
 
