@@ -30,13 +30,13 @@ On the command prompt run the following commands:
 
 URL : http://localhost:3000
 
-Add new user from signup and login
+Add new user from signup page and login
 
 ### 5. Useful Link
 
 - Promise based HTTP client - [axios](https://github.com/mzabriskie/axios)
 - JSON Web Tokens(jwt) - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 - MongoDB object modeling tool- [mongoose](http://mongoosejs.com/)
-- Predictable state container [Redux](http://redux.js.org/)
-- Redux Form [Redux Form](http://redux-form.com/7.0.0/)
+- Predictable state container - [Redux](http://redux.js.org/)
+- Redux Form - [Redux Form](http://redux-form.com/7.0.0/)
 - Declarative routing for React - [react-router](https://reacttraining.com/react-router/)
