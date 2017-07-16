@@ -3,6 +3,12 @@ var jwt = require('jsonwebtoken');
 var HttpStatus = require('http-status-codes');
 var User = require('../models/user');
 
+/**
+ * Authenticate user by email and password
+ *
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.authenticate = function (req, res) {
     User.findOne({
         email: req.body.email

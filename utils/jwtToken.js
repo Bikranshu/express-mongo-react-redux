@@ -1,5 +1,12 @@
 var jwt = require('jsonwebtoken');
-// Verifies token on a request
+
+/**
+ * Verifies token on a request
+ *
+ * @param  {string}   token
+ * @param  {function} callback
+ * @return {object}
+ */
 exports.verifyToken = function(token, callback) {
     return jwt.verify(
         token, // The token to be verified

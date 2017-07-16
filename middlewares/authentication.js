@@ -1,7 +1,14 @@
 var HttpStatus = require('http-status-codes');
 var jwtToken = require('../utils/jwtToken');
 
-// route middleware to verify a token
+/**
+ * Route authentication middleware to verify a token
+ *
+ * @param  {object}   req
+ * @param  {object}   res
+ * @param  {function} next
+ *
+ */
 module.exports = function (req, res, next) {
     if (req.headers.authorization) {
         var token = null;

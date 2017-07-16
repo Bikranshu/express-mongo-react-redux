@@ -2,6 +2,12 @@
 var User = require('../models/user');
 var mongoose = require('mongoose');
 
+/**
+ * Find all the users
+ *
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.findAll = function (req, res) {
     User.find({}, function (err, user) {
         if (err)
@@ -10,7 +16,12 @@ exports.findAll = function (req, res) {
     });
 };
 
-
+/**
+ * Store new user
+ *
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.store = function (req, res) {
     var newUser = new User(req.body);
     newUser.save(function (err, user) {
@@ -20,7 +31,12 @@ exports.store = function (req, res) {
     });
 };
 
-
+/**
+ * Find the user by id
+ *
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.findById = function (req, res) {
     User.findById(req.params.id, function (err, user) {
         if (err)
@@ -29,7 +45,12 @@ exports.findById = function (req, res) {
     });
 };
 
-
+/**
+ * Update the user by id
+ *
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.update = function (req, res) {
     User.findOneAndUpdate(req.params.id, req.body, {new: true}, function (err, user) {
         if (err)
@@ -38,7 +59,12 @@ exports.update = function (req, res) {
     });
 };
 
-
+/**
+ * Delete the user by id
+ *
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.delete = function (req, res) {
     User.remove({
         _id: req.params.id

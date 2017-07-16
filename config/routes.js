@@ -1,4 +1,6 @@
-// Load the routes
+/**
+ *  Load the routes
+ */
 var login = require('../routes/index');
 var users = require('../routes/users');
 var auth = require('../routes/auth');
