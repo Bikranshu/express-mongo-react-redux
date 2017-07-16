@@ -15,7 +15,7 @@ var HttpStatus = require('http-status-codes');
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
-    err.status = HttpStatus.HttpStatus.UNAUTHORIZED;
+    err.status = HttpStatus.UNAUTHORIZED;
     next(err);
 });
 

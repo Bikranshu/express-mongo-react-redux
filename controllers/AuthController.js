@@ -2,7 +2,7 @@
 var jwt = require('jsonwebtoken');
 var HttpStatus = require('http-status-codes');
 var User = require('../models/user');
-
+var logger = require('../utils/logger');
 /**
  * Authenticate user by email and password
  *
@@ -28,11 +28,13 @@ exports.authenticate = function (req, res) {
                         token: token
                     });
                 } else {
+                    logger.log('error', 'Authentication failed. Invalid password.');
                     res.status(HttpStatus.UNAUTHORIZED).json({error: true, message: 'Authentication failed. Invalid password.'});
                 }
             });
 
         } else {
+            logger.log('error', 'Invalid username or password.');
             res.status(HttpStatus.UNAUTHORIZED).json({error: true, message: 'Invalid username or password.'});
         }
 

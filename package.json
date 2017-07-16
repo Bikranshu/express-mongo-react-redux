@@ -35,7 +35,9 @@
     "redux-form": "^7.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "serve-favicon": "~2.3.2"
+    "serve-favicon": "~2.3.2",
+    "winston": "^2.3.1",
+    "winston-daily-rotate-file": "^1.4.6"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
