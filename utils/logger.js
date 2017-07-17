@@ -5,7 +5,7 @@ require('winston-daily-rotate-file');
 var tsFormat = new Date().toISOString();
 var logDir = process.env.LOGGING_DIR || 'logs';
 
-// Create log directory if it does not exist
+// Create logs directory if it does not exist
 if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir);
 }

@@ -12,6 +12,6 @@ exports.verifyToken = function(token, callback) {
         token, // The token to be verified
         process.env.TOKEN_SECRET_KEY, // Same token we used to sign
         {}, // No Option, for more see https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback
-        callback //Pass errors or decoded token to callback
+        callback // Pass errors or decoded token to callback
     );
 };

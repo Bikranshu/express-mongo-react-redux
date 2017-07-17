@@ -23,6 +23,7 @@ On the command prompt run the following commands:
  $ npm install
  $ npm start
  $ npm run watch (run on separate terminal window)
+ $ npm run lint (run eslint on separate terminal window)
 ```
 
 ### 4. Usage
@@ -40,3 +41,4 @@ Add new user from signup page and login
 - Predictable state container - [Redux](http://redux.js.org/)
 - Redux Form - [Redux Form](http://redux-form.com/7.0.0/)
 - Declarative routing for React - [react-router](https://reacttraining.com/react-router/)
+- Code linting tool - [ESLint](http://eslint.org/)

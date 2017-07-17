@@ -1,14 +1,14 @@
 var express = require('express');
 var app = express();
 
-//Initialize express
+// Initialize express
 require('./config/express')(app);
 
-//Initialize routes
+// Initialize routes
 require('./config/routes')(app);
 
-//Initialize database
-database = require('./config/database');
+// Initialize database
+require('./config/database');
 
 var HttpStatus = require('http-status-codes');
 

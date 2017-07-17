@@ -1,6 +1,5 @@
 'use strict';
 var User = require('../models/user');
-var mongoose = require('mongoose');
 
 /**
  * Find all the users
