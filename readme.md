@@ -8,7 +8,7 @@ MongoDB, Express, React/Redux and Node (MERN)
 - [NPM](https://npmjs.org/) - Node package manager
 - [MongoDB](https://www.mongodb.com/) - Document-oriented database
 
-### 2. Start MongoDB 
+### 2. Install and Start MongoDB 
 ```
 $ sudo service mongod start
 ```

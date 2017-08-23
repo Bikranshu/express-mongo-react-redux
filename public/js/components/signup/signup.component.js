@@ -84,7 +84,7 @@ class SignupForm extends Component {
                             </div>
                             <div className="col-xs-4">
                                 <button type="submit" className="btn btn-primary btn-block btn-flat"
-                                        disabled={submitting}>Sign UP
+                                        disabled={submitting}>Sign Up
                                 </button>
                             </div>
                         </div>
